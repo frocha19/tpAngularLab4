@@ -1,0 +1,93 @@
+<div class="container">
+    <h1>{{texto}} Registro</h1>
+    <form #f="ngForm">
+        <div class="form-group">
+            <label for="formId">ID</label>
+            <input [(ngModel)]="instrumento.id" name="instrumento.id" type="text" class="form-control" id="id"
+                placeholder="{{this.instrumento.id}}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="formInstrumento">Instrumento</label>
+            <div class="alert alert-danger" role="alert" *ngIf="(instrumento.instrumento == null) && errores">
+                Falta el nombre...
+            </div>
+            <input [(ngModel)]="instrumento.instrumento" name="instrumento.instrumento" type="text" class="form-control"
+                id="formInstrumento" placeholder="Ingrese el nombre..." required>
+        </div>
+        <div class="form-group">
+            <label for="formMarca">Marca</label>
+            <div class="alert alert-danger" role="alert" *ngIf="(instrumento.marca == null) && errores">
+                Falta la marca...
+            </div>
+            <input [(ngModel)]="instrumento.marca" name="instrumento.marca" type="text" class="form-control"
+                id="formMarca" placeholder="Ingrese la marca..." required>
+        </div>
+        <div class="form-group">
+            <label for="formModelo">Modelo</label>
+            <div class="alert alert-danger" role="alert" *ngIf="(instrumento.modelo == null) && errores">
+                Falta el modelo...
+            </div>
+            <input [(ngModel)]="instrumento.modelo" name="instrumento.modelo" type="text" class="form-control"
+                id="formModelo" placeholder="Ingrese el modelo..." required>
+        </div>
+        <div class="form-group">
+            <label for="formPrecio">Precio</label>
+            <div class="alert alert-danger" role="alert" *ngIf="(instrumento.precio == null) && errores">
+                Falta el precio...
+            </div>
+            <input [(ngModel)]="instrumento.precio" name="instrumento.precio" type="number" class="form-control"
+                id="formPrecio" placeholder="Ingrese el precio..." required>
+        </div>
+        <div class="form-group">
+            <label for="formCostoEnvio">Costo de Envio</label>
+            <div class="alert alert-danger" role="alert" *ngIf="(instrumento.costoEnvio == null) && errores">
+                Falta el costo de envio...
+            </div>
+            <input [(ngModel)]="instrumento.costoEnvio" name="instrumento.costoEnvio" type="number" class="form-control"
+                id="formCostoEnvio" placeholder="Ingrese el costo de envio..." required>
+            <button *ngIf="instrumento.costoEnvio != 'g'" type="button" class="btn btn-success" (click)="gratis(f)">Es gratis?</button>
+            <button *ngIf="instrumento.costoEnvio == 'g'" type="button" class="btn btn-danger" (click)="gratis(f)">No es gratis?</button>
+        </div>
+        <div class="form-group">
+            <label for="formCantidadVendida">Cantidad Vendida</label>
+            <div class="alert alert-danger" role="alert" *ngIf="(instrumento.cantidadVendida == null) && errores">
+                Falta la cantidad vendida...
+            </div>
+            <input [(ngModel)]="instrumento.cantidadVendida" name="instrumento.cantidadVendida" type="number"
+                class="form-control" id="formCantidadVendida" placeholder="Ingrese la cantidad vendida..." required>
+        </div>
+        <div class="form-group">
+            <label for="formFile">Imagen</label>
+            <div>
+                <div class="alert alert-danger" role="alert" *ngIf="(image == null) && errores">
+                    Falta la imagen...
+                </div><br>
+            </div>
+            <img *ngIf="hayDato" src="/assets/imagenes/{{this.instrumento.imagen}}" width="300px"
+                [ngClass]="{'d-none': cambioImg}">
+            <button *ngIf="!cambiarImg && hayDato" type="button" class="btn btn-outline-primary"
+                (click)="this.cambiarImg=!this.cambiarImg" [ngClass]="{'d-none': cambioImg}">Cambiar
+                imagen?</button>
+            <button *ngIf="cambiarImg && hayDato" type="button" class="btn btn-outline-danger"
+                (click)="this.cambiarImg=!this.cambiarImg" [ngClass]="{'d-none': cambioImg}">No
+                cambiar
+                imagen?</button>
+            <input *ngIf="cambiarImg" accept="image/gif,image/jpeg,image/jpg,image/png" type="file"
+                class="form-control-file" id="formFile" (change)="handleImage($event)" required>
+        </div>
+        <div class="form-group">
+            <label for="formTextArea">Descripcion</label>
+            <div class="alert alert-danger" role="alert" *ngIf="(instrumento.descripcion == null) && errores">
+                Falta la descripcion...
+            </div>
+            <textarea [(ngModel)]="instrumento.descripcion" name="instrumento.descripcion" class="form-control"
+                id="formTextArea" rows="3" placeholder="Ingrese la descripcion..." required></textarea>
+        </div>
+        <div class="container">
+            <button type="button" class="btn btn-outline-success btn-block" (click)="onSubmit(f)">{{this.texto}}
+                Registro</button>
+            <button type="button" class="btn btn-outline-danger btn-block" [routerLink]="['/abm']">Cancelar
+                Registro</button>
+        </div>
+    </form>
+</div>

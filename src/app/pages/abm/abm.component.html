@@ -1,0 +1,42 @@
+<div class="mt-5 container text-center">
+    <app-loading *ngIf="loading"></app-loading>
+    <div class="container">
+        <div *ngIf="!hayDatos && !loading" class="alert alert-danger text-center animated fadeIn" role="alert">
+            No se encontraron Registros
+        </div>
+    </div>
+    <button type="button" class="btn btn-outline-primary btn-block mb-3" routerLink="/abm/0">Agregar un Nuevo Instrumento</button>
+    <div *ngIf="!loading" class="productos">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Instrumento</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">costoEnvio</th>
+                    <th scope="col">cantidadVendida</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let i of instrumentos">
+                <tr>
+                    <th scope="row">{{i.id}}</th>
+                    <td>{{i.instrumento}}</td>
+                    <td>{{i.marca}}</td>
+                    <td>{{i.modelo}}</td>
+                    <td>{{i.precio}}</td>
+                    <td>{{i.costoEnvio}}</td>
+                    <td>{{i.cantidadVendida}}</td>
+                    <td>{{i.descripcion}}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-warning" routerLink="/abm/{{i.id}}">Editar</button>
+                        <button type="button" class="btn btn-outline-danger" (click)="eliminar(i.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

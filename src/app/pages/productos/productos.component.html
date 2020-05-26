@@ -1,0 +1,35 @@
+<div class="mt-5">
+    <app-loading *ngIf="loading"></app-loading>
+    <div class="container">
+        <div *ngIf="!hayDatos && !loading" class="alert alert-danger text-center animated fadeIn" role="alert">
+            No se encontraron Registros
+        </div>
+    </div>
+    <div *ngIf="!loading && hayDatos" class="container">
+        <div class="card animated fadeIn p-1 m-1" *ngFor="let instrumento of instrumentos; let i=index">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="assets/imagenes/{{this.instrumento.imagen}}" class="card-img"
+                        alt="Imagen {{this.instrumento.id}}">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.instrumento.instrumento}}</h5>
+                        <p class="card-text">$ {{this.instrumento.precio}}</p>
+                        <p *ngIf="this.instrumento.costoEnvio.length > 1" class="card-text envioPago">Costo de
+                            Envio Interior de Argentina:
+                            ${{this.instrumento.costoEnvio}}</p>
+                        <p *ngIf="this.instrumento.costoEnvio.length <= 1" class="card-text envioGratis"><img
+                                src="assets/imagenes/camion.png" alt="Envio Gratis"> Envio
+                            Gratis a todo el pais</p>
+                        <p class="card-text">{{this.instrumento.cantidadVendida}} vendidos</p>
+                    </div>
+                    <button type="button" class="btn btn-outline-primary btn-block"
+                        (click)="redireccionar(this.instrumento.id)">Ver
+                        Instrumento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
