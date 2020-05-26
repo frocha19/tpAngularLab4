@@ -1,4 +1,4 @@
-# Trabajo Practico 2 Vue.js
+# Trabajo Practico Angular - Laboratorio 4
 
 ## Integrantes
 * Astorga Nicolás,
@@ -7,16 +7,15 @@
 * Valenti Joel
 
 ## Framework y Librerias usadas:
-    VueJs
+    Angular
     BootstrapVue
     Font Awesome
-	Axios
 
 ## Ejecutar el siguiente comando para crear el node_module:
     npm install
 
 ## Ejecutar el siguiente comando para iniciar el servidor:
-    npm run serve 
+    ng serve 
 
 ## Direccion del Servidor Local:
-    http://localhost:8080/
+    http://localhost:4200/
