@@ -20,6 +20,7 @@ export class RegistroComponent implements OnInit {
   constructor(private servicio: InstrumentosService, private router: Router) {}
 
   ngOnInit(): void {
+    this.instrumento.id = null;
     if (Number(this.router.url.substring(5)) > 0) {
       this.texto = 'Editar';
       this.cargarInstrumento(Number(this.router.url.substring(5)));
@@ -42,14 +43,14 @@ export class RegistroComponent implements OnInit {
       await this.servicio.subirImg(formData).subscribe(() => {
         this.instrumento.imagen = this.image.name;
       });
-      if (f.value.id >= 1) {
-        this.servicio.post(this.instrumento).subscribe(() => {
-          alert('Registro guardado...');
+      if (this.instrumento.id !== null) {
+        this.servicio.put(this.instrumento).subscribe(() => {
+          alert('Registro editado...');
           this.router.navigateByUrl('/abm');
         });
       } else {
-        this.servicio.put(this.instrumento).subscribe(() => {
-          alert('Registro editado...');
+        this.servicio.post(this.instrumento).subscribe(() => {
+          alert('Registro guardado...');
           this.router.navigateByUrl('/abm');
         });
       }
